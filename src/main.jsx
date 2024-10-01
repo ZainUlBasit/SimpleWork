@@ -1,6 +1,10 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import "./index.css";
 import { store } from "./store/store";
 import { Provider } from "react-redux";
@@ -66,6 +70,7 @@ const router = createBrowserRouter([
       { path: "create-new-gig/4", element: <CreateNewGig4 /> },
       { path: "create-new-gig/5", element: <CreateNewGig5 /> },
       { path: "create-new-gig/6", element: <CreateNewGig6 /> },
+      { path: "*", element: <Navigate to="/seller/dashboard" /> },
     ],
   },
   {
@@ -85,6 +90,7 @@ const router = createBrowserRouter([
       { path: "jobdetails", element: <JobDetails /> },
       { path: "jobdetailstwo", element: <JobDetailstwo /> },
       { path: "postajob", element: <PostaJob /> },
+      { path: "*", element: <Navigate to="/" /> },
     ],
   },
 ]);

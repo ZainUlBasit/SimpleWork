@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Navbar2 from "./components/navbar2/Navbar";
+import Loader from "./components/Loader/Loader";
 
 const Layout2 = () => {
   const [loading, setLoading] = useState(true);
@@ -16,7 +17,9 @@ const Layout2 = () => {
   }, []);
 
   return loading ? (
-    <div>Loading...</div>
+    <div className="flex justify-center items-center w-screen h-screen bg-[black] relative">
+      <Loader />
+    </div>
   ) : (
     <div className="w-[100vw] overflow-hidden bg-black relative">
       {/* Ellipses with lower z-index */}

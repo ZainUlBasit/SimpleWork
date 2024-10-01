@@ -40,18 +40,28 @@ const Navbar = () => {
         className="bg-bgnav flex justify-between items-center text-white px-4 py-3 rounded-2xl"
         data-aos="fade-down"
       >
-        <div className="flex items-center text-2xl font-poppins font-semibold">
+        <div
+          className="flex items-center text-2xl font-poppins font-semibold cursor-pointer"
+          onClick={() => {
+            navigate("/seller/dashboard");
+          }}
+        >
           <img src="/logo.png" className="w-[100px]" />
           <div className="">SIMPLEWORK</div>
         </div>
         <div className="flex items-center gap-x-3 font-poppins">
           {[
-            { title: "Dashboard", link: "" },
+            { title: "Dashboard", link: "/seller/dashboard" },
             { title: "Favorites", link: "" },
             { title: "Membership", link: "" },
             { title: "More", link: "" },
           ].map((dt) => (
-            <div className="flex items-center gap-x-1">
+            <div
+              className="flex items-center gap-x-1 cursor-pointer"
+              onClick={() => {
+                navigate(dt.link);
+              }}
+            >
               {dt.title}
               <IoIosArrowDown />
             </div>
