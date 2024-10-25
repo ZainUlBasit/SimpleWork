@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import StepsBtn from "../../components/Buttons/StepsBtn";
 import { BiSolidChevronDown } from "react-icons/bi";
-import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import GradientBtn from "../../components/Buttons/GradientBtn";
 import { useNavigate } from "react-router-dom";
+import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import SelectComp from "./SelectComp";
 
 const CreateNewGig2 = () => {

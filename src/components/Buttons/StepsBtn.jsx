@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import "./StepsBtn.css";
-import { useLocation } from "react-router-dom";
+import React from "react";
+// import "./StepsBtn.css";
 
-const StepsBtn = () => {
+const StepsBtn = ({ currentStep }) => {
   const stages = ["/coming.png", "/running.png", "/done.png"];
   const StepsData = [
     "Overview",
@@ -12,92 +11,60 @@ const StepsBtn = () => {
     "Gallery",
     "Publish",
   ];
+
+  // Define a function to determine the image source based on the current step
+  const getImageSource = (index) => {
+    if (index === 0) {
+      if (currentStep === 1) return stages[1];
+      else if (currentStep > 1) return stages[2];
+      else return stages[0];
+    }
+    if (index === 1) {
+      if (currentStep === 2) return stages[1];
+      else if (currentStep > 2) return stages[2];
+      else return stages[0];
+    }
+    if (index === 2) {
+      if (currentStep === 3) return stages[1];
+      else if (currentStep > 3) return stages[2];
+      else return stages[0];
+    }
+    if (index === 3) {
+      if (currentStep === 4) return stages[1];
+      else if (currentStep > 4) return stages[2];
+      else return stages[0];
+    }
+    if (index === 4) {
+      if (currentStep === 5) return stages[1];
+      else if (currentStep > 5) return stages[2];
+      else return stages[0];
+    }
+    if (index === 5) {
+      if (currentStep === 6) return stages[1];
+      else if (currentStep > 6) return stages[2];
+      else return stages[0];
+    }
+  };
+
   return (
-    <div className="radio-input">
+    <div className="flex my-4 mb-20">
+      {/* steps array */}
       {StepsData.map((dt, i) => (
-        <div className="radio-item !w-[95px]">
-          <img
-            src={
-              (i === 0 && Step1) || Step2 || Step3 || Step4 || Step5 || Step6
-                ? stages[0]
-                : i === 1
-                ? Step2 || Step3 || Step4 || Step5 || Step6
-                : i === 2
-                ? Step3 || Step4 || Step5 || Step6
-                : i === 3
-                ? Step4 || Step5 || Step6
-                : i === 4
-                ? Step5 || Step6
-                : i === 5 && Step6
-            }
-          />
+        <div className="flex items-center gap-x-3 pr-3">
+          <div key={i} className="flex flex-col justify-start relative">
+            <img src={getImageSource(i)} className="w-8" />
+            <div className="flex flex-col w-full font-poppins absolute -bottom-[50px] left-0">
+              <div className="text-sm font-[300] whitespace-nowrap">
+                Step {i + 1}
+              </div>
+              <div className="font-semibold">{dt}</div>
+            </div>
+          </div>
+          {i < 5 && (
+            <div className="w-[120px] h-[3px] bg-[#FFFFFFB2] rounded-full"></div>
+          )}
         </div>
       ))}
-      <div className="w-[100px] h-[3px] bg-[#FFFFFFB2] mr-10 rounded-full -mt-12"></div>{" "}
-      <div className="radio-item !w-[95px]">
-        <input
-          type="radio"
-          checked={Step2 || Step3 || Step4 || Step5 || Step6}
-          id="value-2"
-          value="value-2"
-        />
-        <div className="circle"></div>
-        <p className="label-text">Step 2</p>
-        <p className="font-poppins text-[1rem] -mt-2 font-bold text-[#ffffffb2] text-center">
-          Pricing
-        </p>
-      </div>
-      <div className="w-[100px] h-[3px] bg-[#FFFFFFB2] mr-10 rounded-full -mt-12"></div>
-      <div className="radio-item !w-[95px]">
-        <input
-          type="radio"
-          checked={Step3 || Step4 || Step5 || Step6}
-          id="value-3"
-          value="value-3"
-        />
-        <div className="circle"></div>
-        <p className="label-text">Step 3</p>
-        <p className="font-poppins text-[1rem] -mt-2 font-bold text-[#ffffffb2] text-center">
-          Description
-        </p>
-      </div>
-      <div className="w-[100px] h-[3px] bg-[#FFFFFFB2] mr-10 rounded-full -mt-12"></div>
-      <div className="radio-item !w-[95px]">
-        <input
-          type="radio"
-          checked={Step4 || Step5 || Step6}
-          id="value-4"
-          value="value-4"
-        />
-        <div className="circle"></div>
-        <p className="label-text">Step 4</p>
-        <p className="font-poppins text-[1rem] -mt-2 font-bold text-[#ffffffb2] text-center">
-          Requirement{" "}
-        </p>
-      </div>
-      <div className="w-[100px] h-[3px] bg-[#FFFFFFB2] mr-10 rounded-full -mt-12"></div>
-      <div className="radio-item !w-[95px]">
-        <input
-          type="radio"
-          checked={Step5 || Step6}
-          id="value-5"
-          value="value-5"
-        />
-        <div className="circle"></div>
-        <p className="label-text">Step 5</p>
-        <p className="font-poppins text-[1rem] -mt-2 font-bold text-[#ffffffb2] text-center">
-          Gallery
-        </p>
-      </div>
-      <div className="w-[100px] h-[3px] bg-[#FFFFFFB2] mr-10 rounded-full -mt-12"></div>
-      <div className="radio-item !w-[95px]">
-        <input type="radio" checked={Step6} id="value-6" value="value-6" />
-        <div className="circle"></div>
-        <p className="label-text">Step 6</p>
-        <p className="font-poppins text-[1rem] -mt-2 font-bold text-[#ffffffb2] text-center">
-          Publish
-        </p>
-      </div>
     </div>
   );
 };
