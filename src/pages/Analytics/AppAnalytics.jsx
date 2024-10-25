@@ -36,17 +36,20 @@ const AppAnalytics = () => {
   return (
     <div className="px-5 flex w-full">
       <SideMenu />
-      <div className="flex flex-col w-[80%]">
+      <div
+        className="flex flex-col fade-in"
+        style={{ width: "calc(100% - 250px)" }}
+      >
         <div className="">Analytics</div>
-        <div className="flex gap-x-3 gap-y-3 justify-between text-white px-4">
+        <div className="flex gap-x-3 gap-y-3 justify-center text-white px-4 flex-wrap w-[100%]">
           <AnalyticsCard title={"Overall Selling"} amount={"$ 200.33K"} />
           <AnalyticsCard title={"Earning in August"} amount={"$ 200.33K"} />
           <AnalyticsCard title={"Orders Completed"} amount={"29"} />
           <AnalyticsCard title={"On Time delivery"} amount={"80%"} />
         </div>
-        <div className="flex items-stretch justify-between px-3 py-3">
-          <div className="flex justify-center items-center bg-[#FFFFFF33] px-4 rounded-2xl">
-            <div className="w-[700px]">
+        <div className="flex items-stretch justify-between px-3 py-3 flex-wrap w-[100%]">
+          <div className="flex justify-center items-center bg-[#FFFFFF33] px-4 rounded-2xl w-[80%]">
+            <div className="w-[100%] ">
               <div className="flex justify-between w-full items-center ">
                 <div className="flex items-center justify-between w-full text-white font-poppins px-3 py-4 -mt-10">
                   <div className="text-xl font-poppins font-semibold px-4">
@@ -132,7 +135,7 @@ const AppAnalytics = () => {
               <AnalyticsBarChart />
             </div>
           </div>
-          <div className="font-poppins text-white flex items-center flex-col justify-center gap-y-3">
+          <div className="font-poppins text-white flex items-center flex-col justify-center gap-y-3 w-[20%]">
             <div className="bg-[#FFFFFF33] py-2 pt-5 w-[330px] flex flex-col justify-between items-center rounded-3xl h-[34vh]">
               <div className="px-5 text-xl font-poppins flex w-full justify-start">
                 Orders

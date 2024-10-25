@@ -2,6 +2,36 @@ import { useState } from "react";
 import Search from "../../assets/search-normal.png";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/logo2.png";
+import NavItem from "./NavItem";
+
+const NavData = [
+  {
+    title: "Find Job",
+    Link: "/findjob",
+  },
+  {
+    title: "GigList",
+    Link: "/giglist",
+  },
+  {
+    title: "How we are",
+    Link: "/how-we-are",
+    SubLinks: [
+      { title: "Our Story", Link: "/our-story" },
+      { title: "Team", Link: "/team" },
+      { title: "Careers", Link: "/careers" },
+    ],
+  },
+  {
+    title: "Resources",
+    Link: "/how-we-are",
+    SubLinks: [
+      { title: "Blog", Link: "/blog" },
+      { title: "Case Studies", Link: "/case-studies" },
+      { title: "Guides", Link: "/guides" },
+    ],
+  },
+];
 
 export default function Navbar() {
   // State to control mobile menu visibility
@@ -12,9 +42,11 @@ export default function Navbar() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const [Token, setToken] = useState(localStorage.getItem("token"));
+
   return (
-    <div className="bg-[#381138] w-full p-4 px-6 md:px-12">
-      <div className="flex flex-row justify-between items-center text-white">
+    <div className="bg-[#381138] w-full px-6 md:px-12 h-[12vh]">
+      <div className="flex flex-row justify-between items-center text-white h-full">
         {/* Logo */}
         <div className="flex flex-row items-center">
           <div className="h-[80px] w-[100px]">
@@ -26,63 +58,10 @@ export default function Navbar() {
         </div>
 
         {/* Links Section (hidden on mobile) */}
-        <div className="hidden md:block">
-          <ul className="flex flex-row gap-x-10">
-            <li className="relative group">
-              <Link to={"/findjob"} className="font-bold">
-                Find Job
-              </Link>
-              {/* Dropdown */}
-              {/* <ul className="absolute hidden group-hover:block bg-[#381138] p-2 space-y-2 text-sm">
-                                <li><Link to={"/findjob"}>Find Job</Link></li>
-                                <li><Link to={"/giglist"}>GigList</Link></li>
-                                <li><Link to={"/aboutseller"}>About Seller</Link></li>
-                                <li><a href="#">Solution 2</a></li>
-                                <li><a href="#">Solution 3</a></li>
-                            </ul> */}
-            </li>
-            <li className="relative group">
-              <a className="font-bold">
-                <Link to={"/giglist"}>GigList</Link>
-              </a>
-              {/* Dropdown */}
-              {/* <ul className="absolute hidden group-hover:block bg-[#381138] p-2 space-y-2 text-sm">
-                                <li><a href="#">Basic</a></li>
-                                <li><a href="#">Premium</a></li>
-                                <li><a href="#">Enterprise</a></li>
-                            </ul> */}
-            </li>
-            <li className="relative group">
-              <a className="font-bold">How we are</a>
-              {/* Dropdown */}
-              <ul className="absolute hidden group-hover:block bg-[#381138] p-2 space-y-2 text-sm">
-                <li>
-                  <a href="#">Our Story</a>
-                </li>
-                <li>
-                  <a href="#">Team</a>
-                </li>
-                <li>
-                  <a href="#">Careers</a>
-                </li>
-              </ul>
-            </li>
-            <li className="relative group">
-              <a className="font-bold">Resources</a>
-              {/* Dropdown */}
-              <ul className="absolute hidden group-hover:block bg-[#381138] p-2 space-y-2 text-sm">
-                <li>
-                  <a href="#">Blog</a>
-                </li>
-                <li>
-                  <a href="#">Case Studies</a>
-                </li>
-                <li>
-                  <a href="#">Guides</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
+        <div className="hidden md:flex gap-x-6 h-full">
+          {NavData.map((dt, index) => (
+            <NavItem key={index} nav={dt} />
+          ))}
         </div>
 
         {/* Hamburger Icon (visible on mobile) */}
@@ -102,9 +81,13 @@ export default function Navbar() {
             />
             <img src={Search} alt="Search Icon" className="w-5 h-5 ml-2" />
           </div>
-          <Link to={"/login"} className="p-3 border border-white text-sm">
-            Login
-          </Link>
+          {Token ? (
+            <div className="h-12 w-12 bg-black rounded-full"></div>
+          ) : (
+            <Link to={"/login"} className="p-3 border border-white text-sm">
+              Login
+            </Link>
+          )}
           <button className="p-3 bg-gradient-to-br from-[#DE0588] to-[#460BCB] text-sm">
             Get Started
           </button>

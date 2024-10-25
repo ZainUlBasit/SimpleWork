@@ -5,6 +5,8 @@ export default {
     extend: {
       colors: {
         bgnav: "#26144F",
+        main: "#DE0588",
+        sec: "#460BCB",
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],

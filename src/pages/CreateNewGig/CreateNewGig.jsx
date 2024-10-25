@@ -10,7 +10,9 @@ const CreateNewGig = () => {
   const maxLength = 100;
   const [checked, setChecked] = useState([]);
   const [Tags, setTags] = useState("");
+  const [NewTag, setNewTag] = useState("");
   const navigate = useNavigate();
+  const maxTags = 5; // Maximum number of tags allowed
 
   const handleChange = (e) => {
     setText(e.target.value);
@@ -38,6 +40,7 @@ const CreateNewGig = () => {
             service like yours
           </div>
           <div className="relative w-full">
+            {/* title of gig */}
             <textarea
               className="w-full bg-transparent text-white border-white border-[1px] rounded-2xl p-2 h-[20vh] text-[1rem] font-poppins outline-none mt-2 resize-none"
               placeholder="Lorem Ipsum ..."
@@ -52,6 +55,9 @@ const CreateNewGig = () => {
             </div>
           </div>
         </div>
+        {/* =========================== */}
+        {/* cat and sub cat */}
+        {/* =========================== */}
         <div className="flex-col w-[80%] mt-7">
           <div className="font-semibold text-xl">Category</div>
           <div className="text-[.7rem] font-thin w-[50%] mb-1">
@@ -90,6 +96,9 @@ const CreateNewGig = () => {
             </div>
           </div>
         </div>
+        {/* =========================== */}
+        {/* Meta Data */}
+        {/* =========================== */}
         <div className="flex-col w-[80%] mt-7">
           <div className="font-semibold text-xl">Gig Metadata</div>
           <div className="flex justify-between py-5">
@@ -215,16 +224,49 @@ const CreateNewGig = () => {
             Enter search terms you feel your buyers will use when looking for
             your service.
           </div>
-          <div className="relative w-full">
-            <input
-              type="text"
-              className="w-full h-fit bg-transparent text-white border-white border-[1px] rounded-2xl p-4 text-[1rem] font-poppins outline-none mt-2 resize-none"
-              placeholder="Lorem Ipsum ..."
-              minLength={100}
-              maxLength={maxLength}
-              value={text}
-              onChange={handleChange}
-            />
+          <div className="relative w-full flex items-center gap-x-2 border-white border-[1px] rounded-2xl p-2 flex-wrap">
+            {/* Displaying the tags */}
+            {Tags &&
+              Tags.map((tg) => (
+                <div className="w-fit h-fit bg-transparent text-white bg-gray-500 border-white border-[1px] rounded-xl p-4 pt-6 pr-8 text-[1rem] font-poppins outline-none resize-none relative">
+                  <div
+                    className="flex justify-center items-center w-5 h-5 rounded-full bg-transparent text-white border-2 border-white absolute top-1 right-1 hover:bg-gradient-to-l hover:from-main hover:to-sec font-alegreya text-[.8rem] cursor-pointer transition-all ease-in-out duration-700"
+                    id={tg}
+                    onClick={(e) => {
+                      setTags(Tags.filter((dt) => dt !== e.target.id));
+                    }}
+                  >
+                    X
+                  </div>
+                  {tg}
+                </div>
+              ))}
+            {Tags.length < maxTags && (
+              <input
+                type="text"
+                className="w-full max-w-[300px] h-fit bg-transparent text-white border-none rounded-2xl p-4 text-[1rem] font-poppins outline-none resize-none"
+                placeholder="Lorem Ipsum ..."
+                minLength={100}
+                maxLength={maxLength}
+                value={NewTag}
+                onChange={(e) => {
+                  setNewTag(e.target.value);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && NewTag.trim() !== "") {
+                    // Prevent default behavior
+                    e.preventDefault();
+
+                    // Only add the tag if we haven't exceeded the maximum number of tags
+                    if (Tags.length < maxTags) {
+                      // Add the new tag to the Tags state and reset the input field
+                      setTags([...Tags, NewTag.trim()]);
+                      setNewTag(""); // Clear the input field
+                    }
+                  }
+                }} // Detect "Enter" key press
+              />
+            )}
             {/* Character counter in the bottom-right corner */}
             <div className="absolute bottom-3 right-3 text-white text-[.7rem]">
               05 Tags Maximum
@@ -236,6 +278,13 @@ const CreateNewGig = () => {
             <GradientBtn
               title={"Continue"}
               onClick={() => {
+                const gigInfo = {
+                  title: text,
+                  cat: "test cat",
+                  subcat: "test sub cat",
+                  servicetags: checked,
+                };
+                localStorage.setItem("gig-info", JSON.stringify(gigInfo));
                 navigate("/seller/create-new-gig/2");
               }}
             />

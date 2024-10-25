@@ -7,11 +7,11 @@ const OrderList = () => {
   return (
     <div className="px-5 flex w-full text-white">
       <SideMenu />
-      <div className="flex flex-col w-full px-4 pt-4 fade-in">
+      <div className="flex justify-between h-fit py-5 px-5 w-[100%] text-white font-poppins text-2xl font-semibold rounded-[20px] overflow-hidden items-center flex-wrap gap-y-3">
         <div className="font-poppins font-bold text-xl my-3 mb-6">
           <div className="">Orders</div>
         </div>
-        <div className="flex items-center gap-x-7 font-poppins font-semibold mb-8 ml-4">
+        <div className="flex items-center gap-x-7 font-poppins font-semibold mb-8 ml-4 flex-wrap gap-y-4">
           <div
             className={`py-3 cursor-pointer transition-all ease-in-out duration-700 ${
               CurrentStatus === 1
@@ -73,7 +73,7 @@ const OrderList = () => {
             CANCELLED (02)
           </div>
         </div>
-        <div className="flex flex-col h-fit py-5 px-5 w-full bg-[#FFFFFF33] rounded-[20px] overflow-hidden">
+        <div className="flex flex-col h-fit py-5 px-5 w-[100%] bg-[#FFFFFF33] rounded-[20px] overflow-auto">
           <div className="border-b-[1px] border-b-white pb-3 font-poppins px-2 uppercase">
             {CurrentStatus === 1
               ? "Active"
@@ -86,37 +86,39 @@ const OrderList = () => {
               : CurrentStatus === 5 && "CANCELLED"}{" "}
             Orders
           </div>
-          <OrderTable
-            status={
-              CurrentStatus === 1
-                ? "Active"
-                : CurrentStatus === 2
-                ? "Pending"
-                : CurrentStatus === 3
-                ? "DELEVERD"
-                : CurrentStatus === 4
-                ? "COMPLETED"
-                : CurrentStatus === 5 && "CANCELLED"
-            }
-            data={[
-              {
-                avatar: "https://via.placeholder.com/50", // Replace with actual avatar URL
-                productImage: "https://via.placeholder.com/100x60", // Replace with actual image URL
-                due_on: new Date(),
-                total: 200,
-                notes: "lashjvdhgascvdhgaschgxcashgcxahgc",
-                status: "ACTIVE",
-              },
-              {
-                avatar: "https://via.placeholder.com/50", // Replace with actual avatar URL
-                productImage: "https://via.placeholder.com/100x60", // Replace with actual image URL
-                due_on: new Date(),
-                total: 200,
-                notes: "lashjvdhgascvdhgaschgxcashgcxahgc",
-                status: "ACTIVE",
-              },
-            ]}
-          />
+          <div className="flex flex-col h-fit w-[100%] bg-transparent rounded-[20px] overflow-x-auto">
+            <OrderTable
+              status={
+                CurrentStatus === 1
+                  ? "Active"
+                  : CurrentStatus === 2
+                  ? "Pending"
+                  : CurrentStatus === 3
+                  ? "DELEVERD"
+                  : CurrentStatus === 4
+                  ? "COMPLETED"
+                  : CurrentStatus === 5 && "CANCELLED"
+              }
+              data={[
+                {
+                  avatar: "https://via.placeholder.com/50", // Replace with actual avatar URL
+                  productImage: "https://via.placeholder.com/100x60", // Replace with actual image URL
+                  due_on: new Date(),
+                  total: 200,
+                  notes: "lashjvdhgascvdhgaschgxcashgcxahgc",
+                  status: "ACTIVE",
+                },
+                {
+                  avatar: "https://via.placeholder.com/50", // Replace with actual avatar URL
+                  productImage: "https://via.placeholder.com/100x60", // Replace with actual image URL
+                  due_on: new Date(),
+                  total: 200,
+                  notes: "lashjvdhgascvdhgaschgxcashgcxahgc",
+                  status: "ACTIVE",
+                },
+              ]}
+            />
+          </div>
         </div>
       </div>
     </div>

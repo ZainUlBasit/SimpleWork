@@ -42,6 +42,7 @@ import PostaJob from "./pages/PostaJob";
 import Home from "./pages/Home/Home";
 import Layout2 from "./Layout2";
 import ManagePaymentMethods from "./pages/ManagePaymentMethods/ManagePaymentMethods";
+import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter([
   {
@@ -99,6 +100,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
       <RouterProvider router={router} />
+      <Toaster position="top-right" reverseOrder={false} />
     </Provider>
   </React.StrictMode>
 );

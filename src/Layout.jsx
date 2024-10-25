@@ -21,7 +21,7 @@ const Layout = () => {
       <Loader />
     </div>
   ) : (
-    <div className="w-screen bg-black min-h-screen relative">
+    <div className="w-[100vw] overflow-hidden  bg-black min-h-screen relative">
       {/* Ellipses with lower z-index */}
       <img
         src="/Ellipse1.png"
@@ -40,7 +40,7 @@ const Layout = () => {
       />
 
       {/* Navbar with higher z-index */}
-      <div className="relative z-10">
+      <div className="relative z-10 w-[100%]">
         <Navbar />
       </div>
 

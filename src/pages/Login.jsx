@@ -1,15 +1,46 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Typing from "../assets/bro.png";
 import Cube from "../assets/cube.png";
+import { LoginApi } from "../Api_Requests/Api_Requests";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function Login() {
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await LoginApi({ email, password });
+      console.log(response);
+      if (response.data.success) {
+        toast.success("Logged-In Successfully!");
+        localStorage.setItem("user", JSON.stringify(response.data.userData));
+        localStorage.setItem("token", response.data.token);
+        navigate("/");
+      }
+    } catch (err) {
+      console.log(err.response.data);
+      if (err.response.data.success) {
+        toast.error(err.response.data.error);
+      }
+      console.log("err: ", err);
+    }
+  };
+
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   return (
-    <div className="bg-black flex items-center justify-center">
+    <div className="bg-black flex items-center justify-center h-screen w-screen">
       <div className="bg-black text-white flex w-[100%] h-[100%] overflow-hidden">
-        
         {/* Left Section */}
         <div className="w-full lg:w-1/2 p-10 mb-20">
-          <div className="flex items-center mb-10">
+          <div
+            className="flex items-center mb-10 cursor-pointer"
+            onClick={() => {
+              navigate("/");
+            }}
+          >
             <img
               src={Cube}
               alt="Logo"
@@ -25,35 +56,42 @@ export default function Login() {
             <p className="mb-6">login to your account</p>
           </div>
 
-          <form>
-            <div className="mb-4">
-              <input
-                type="email"
-                placeholder="Email"
-                className="w-full p-3 rounded border border-gray-600 bg-black text-white focus:outline-none"
-              />
-            </div>
-            <div className="mb-4">
-              <input
-                type="password"
-                placeholder="Password"
-                className="w-full p-3 rounded border border-gray-600 bg-black text-white focus:outline-none"
-              />
-            </div>
-            <div className="mb-6 text-left">
-              <a href="#" className="text-red-500">Forgot Password?</a>
+          <form className="flex flex-col gap-y-4 items-center">
+            <input
+              type="email"
+              placeholder="Email"
+              className="w-full p-3 rounded border border-gray-600 bg-black text-white focus:outline-none max-w-[400px]"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <input
+              type="password"
+              placeholder="Password"
+              className="w-full p-3 rounded border border-gray-600 bg-black text-white focus:outline-none max-w-[400px]"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+
+            <div className="mb-6 text-left max-w-[400px] w-full">
+              <a href="#" className="text-red-500">
+                Forgot Password?
+              </a>
             </div>
             <button
-              type="submit"
-              className="w-full p-3 rounded gradient-button text-white font-bold"
+              // type="submit"
+              className="w-full p-3 rounded bg-gradient-to-l from-[#DE0588] to-[#460BCB] text-white font-bold max-w-[400px]"
+              onClick={onSubmit}
             >
               Login
             </button>
           </form>
 
           <p className="mt-6 text-center">
-            Dont have an account?{' '}
-            <Link to={"/signup"} className="text-pink-500 ">Sign up</Link>
+            Dont have an account?{" "}
+            <Link to={"/signup"} className="text-pink-500 ">
+              Sign up
+            </Link>
           </p>
         </div>
 
@@ -68,7 +106,9 @@ export default function Login() {
               height="300"
               className="mb-6"
             />
-            <h2 className="text-3xl font-bold text-center">Hire or Get Hired</h2>
+            <h2 className="text-3xl font-bold text-center">
+              Hire or Get Hired
+            </h2>
           </div>
         </div>
       </div>

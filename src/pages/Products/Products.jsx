@@ -9,8 +9,11 @@ const Products = () => {
   return (
     <div className="px-5 flex w-full">
       <SideMenu />
-      <div className="flex flex-col w-full fade-in">
-        <div className="flex justify-between h-fit py-5 px-5 w-full text-white font-poppins text-2xl font-semibold rounded-[20px] overflow-hidden items-center">
+      <div
+        className="flex flex-col fade-in"
+        style={{ width: "calc(100% - 250px)" }}
+      >
+        <div className="flex justify-between h-fit py-5 px-5 w-[100%] text-white font-poppins text-2xl font-semibold rounded-[20px] overflow-hidden items-center flex-wrap gap-y-3">
           <div className="">Products</div>
           <div className="w-[220px]">
             <GradientBtn
@@ -19,7 +22,7 @@ const Products = () => {
             />
           </div>
         </div>
-        <div className="flex flex-col h-fit py-5 px-5 w-full bg-[#FFFFFF33] rounded-[20px] overflow-hidden">
+        <div className="flex flex-col h-fit py-5 px-5 w-[100%] bg-[#FFFFFF33] rounded-[20px] overflow-hidden">
           <ProductTable />
         </div>
       </div>

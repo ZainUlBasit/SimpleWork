@@ -53,7 +53,7 @@ export default function Populargigs() {
             <div className="w-[100%] p-15  flex items-center justify-center ">
               <img src={product.imgSrc} alt={product.name} />
             </div>
-            <div className="w-[90%]  bg-pink-500 px-10 py-3   ">
+            <div className="w-[90%] bg-gradient-to-l from-main to-sec px-10 py-3   ">
               <h1 className="text-[yellow] ">{product.name}</h1>
               <p>{product.disc}</p>
             </div>
